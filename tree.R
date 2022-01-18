@@ -134,6 +134,8 @@ mpialg2=mpialg[mpialg$alg==2,];
 plot(1:24,mpialg0$time, xlab="mpi threads", ylab="time", lty = 1, lwd = 1,col='blue',type='b',pch = 19,xlim=c(0,24), ylim=c(25,400),main="mpi performance with different algorithms")
 lines(1:24, mpialg1$time,lty = 1, lwd = 1,col='green',type='b',pch = 19)
 lines(1:24, mpialg2$time,lty = 1, lwd = 1,col='red',type='b',pch = 19)
+legend(x="topleft",legend=c("merge sort serial","merge sort parallel","quick select"),col=c("blue","green","red"),lty=c(1,1,1),pch=c(19,19,19))
+
 dev.off()
 
 
