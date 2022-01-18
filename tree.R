@@ -63,18 +63,18 @@ dev.off()
 }
 
 png("ompvsmpistrong.png",type='cairo')
-plot(1:24, ompv,lty = 1, lwd = 1, col='red',type='b',pch = 19, xlab="omp (red), mpi(blue)", ylab="time of execution")
+plot(1:24, ompv,lty = 1, lwd = 1, col='red',type='b',pch = 19, xlab="omp (red), mpi(blue)", ylab="time of execution", main="mpi vs omp strong scaling")
 lines(1:24, mpiv,lty = 1, lwd = 1,col='blue',type='b',pch = 19)
 dev.off()
 
 png("strongomp.png",type='cairo')
-plot(1:24, ompv,lty = 1, lwd = 1, col='blue', xlab="number of omp threads", ylab="time of execution") 
+plot(1:24, ompv,lty = 1, lwd = 1, col='blue', xlab="number of omp threads", ylab="time of execution", main="Strong omp scaling") 
 mod=lm(ompv~eompv)
 lines(1:24,fitted(mod),col='red');
 dev.off()
 
 png("strongmpi.png",type='cairo')
-plot(1:24, mpiv,lty = 1, lwd = 1, col='blue', xlab="number of mpi threads", ylab="time of execution")
+plot(1:24, mpiv,lty = 1, lwd = 1, col='blue', xlab="number of mpi threads", ylab="time of execution", main="Strong mpi scaling")
 mod=lm(mpiv~empiv)
 lines(1:24,fitted(mod),col='red');
 dev.off()
@@ -82,7 +82,7 @@ dev.off()
 
 
 png("ompvsmpiweak.png",type='cairo')
-plot(1:24, ompweak[,2],lty = 1, lwd = 1, col='red',type='b',pch = 19, xlab="omp (red), mpi (blue)", ylab="time of execution")
+plot(1:24, ompweak[,2],lty = 1, lwd = 1, col='red',type='b',pch = 19, xlab="omp (red), mpi (blue)", ylab="time of execution", main="mpi vs omp weak scaling" )
 lines(1:24, mpiweak[,2],lty = 1, lwd = 1,col='blue',type='b',pch = 19)
 dev.off()
 
@@ -93,7 +93,7 @@ xmpi=(2-2/(mpi)+log2(n)-log2(mpi+1))*n*mpi
 ympi=mpiweak[,2]
 modmpi=lm(ympi~xmpi)
 png("weakmpi.png",type='cairo')
-plot(1:24,ympi,col='blue',xlab="number of mpi threads", ylab="time of execution",main="Weak mpi scaling (constant workload per mpi thread), 1 omp thread")
+plot(1:24,ympi,col='blue',xlab="number of mpi threads", ylab="time of execution",main="Weak mpi scaling (constant workload per mpi thread)")
 lines(1:24,fitted(modmpi),col='red')
 dev.off()
 
@@ -103,7 +103,7 @@ xomp=(1+(log2(n*omp)-log2(2))/omp)*n*omp
 yomp=ompweak[,2]
 modomp=lm(yomp~xomp)
 png("weakomp.png",type='cairo')
-plot(1:24,yomp,col='blue',xlab="number of omp threads", ylab="time of execution",main="Weak omp scaling (constant workload per omp thread), 1 mpi thread" )
+plot(1:24,yomp,col='blue',xlab="number of omp threads", ylab="time of execution",main="Weak omp scaling (constant workload per omp thread)" )
 lines(1:24,fitted(modomp),col='red')
 dev.off()
 
@@ -114,7 +114,7 @@ png("ompalg.png", type='cairo')
 ompalg0=ompalg[ompalg$alg==0,];
 ompalg1=ompalg[ompalg$alg==1,];
 ompalg2=ompalg[ompalg$alg==2,];
-plot(1:24,ompalg0$time, xlab="omp threads", ylab="time", lty = 1, lwd = 1,col='blue',type='b',pch = 19,xlim=c(0,24), ylim=c(25,400))
+plot(1:24,ompalg0$time, xlab="omp threads", ylab="time", lty = 1, lwd = 1,col='blue',type='b',pch = 19,xlim=c(0,24), ylim=c(25,400), main="omp performance with different algorithms")
 lines(1:24, ompalg1$time,lty = 1, lwd = 1,col='green',type='b',pch = 19)
 lines(1:24, ompalg2$time,lty = 1, lwd = 1,col='red',type='b',pch = 19)
 dev.off()
@@ -123,7 +123,7 @@ png("mpialg.png", type='cairo')
 mpialg0=mpialg[mpialg$alg==0,];
 mpialg1=mpialg[mpialg$alg==1,];
 mpialg2=mpialg[mpialg$alg==2,];
-plot(1:24,mpialg0$time, xlab="mpi threads", ylab="time", lty = 1, lwd = 1,col='blue',type='b',pch = 19,xlim=c(0,24), ylim=c(25,400))
+plot(1:24,mpialg0$time, xlab="mpi threads", ylab="time", lty = 1, lwd = 1,col='blue',type='b',pch = 19,xlim=c(0,24), ylim=c(25,400),main="mpi performance with different algorithms")
 lines(1:24, mpialg1$time,lty = 1, lwd = 1,col='green',type='b',pch = 19)
 lines(1:24, mpialg2$time,lty = 1, lwd = 1,col='red',type='b',pch = 19)
 dev.off()
