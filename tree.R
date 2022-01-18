@@ -93,7 +93,7 @@ xmpi=(2-2/(mpi)+log2(n)-log2(mpi+1))*n*mpi
 ympi=mpiweak[,2]
 modmpi=lm(ympi~xmpi)
 png("weakmpi.png",type='cairo')
-plot(1:24,ympi,col='blue',xlab="number of mpi threads", ylab="time of execution",main="Weak mpi scaling (constant workload per mpi thread), omp threads=1")
+plot(1:24,ympi,col='blue',xlab="number of mpi threads", ylab="time of execution",main="Weak mpi scaling (constant workload per mpi thread), 1 omp thread")
 lines(1:24,fitted(modmpi),col='red')
 dev.off()
 
@@ -103,7 +103,7 @@ xomp=(1+(log2(n*omp)-log2(2))/omp)*n*omp
 yomp=ompweak[,2]
 modomp=lm(yomp~xomp)
 png("weakomp.png",type='cairo')
-plot(1:24,yomp,col='blue',xlab="number of omp threads", ylab="time of execution",main="Weak omp scaling (constant workload per omp thread), mpi threads=1" )
+plot(1:24,yomp,col='blue',xlab="number of omp threads", ylab="time of execution",main="Weak omp scaling (constant workload per omp thread), 1 mpi thread" )
 lines(1:24,fitted(modomp),col='red')
 dev.off()
 
