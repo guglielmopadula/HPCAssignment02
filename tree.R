@@ -65,6 +65,7 @@ dev.off()
 png("ompvsmpistrong.png",type='cairo')
 plot(1:24, ompv,lty = 1, lwd = 1, col='red',type='b',pch = 19, xlab="omp (red), mpi(blue)", ylab="time of execution", main="mpi vs omp strong scaling")
 lines(1:24, mpiv,lty = 1, lwd = 1,col='blue',type='b',pch = 19)
+legend(x="topleft",legend=c("omp performance","mpi performance"),col=c("red","blue"),lty=c(1,1),pch=c(19,19))
 dev.off()
 
 png("strongomp.png",type='cairo')
