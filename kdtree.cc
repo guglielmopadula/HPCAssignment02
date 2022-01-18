@@ -626,7 +626,7 @@ void exportTreeC(Node<K>* root){
 
 
 int main(int argc , char *argv[ ]){
-	constexpr int K=2;
+	constexpr int K=15;
 	int reorder=1;
 	int rank;
 	int numprocs;

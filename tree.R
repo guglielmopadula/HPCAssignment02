@@ -139,4 +139,7 @@ legend(x="topleft",legend=c("merge sort serial","merge sort parallel","quick sel
 dev.off()
 
 
-
+vark=read.csv("varingk.csv")
+png("vark.png", type='cairo')
+plot(vark[,1],vark[,2], xlab="K", ylab="time", lty = 1, lwd = 1,col='blue',type='b',pch = 19,main="serial performance with different K (n=10000000)")
+dev.off()
