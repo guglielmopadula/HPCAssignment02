@@ -72,13 +72,14 @@ png("strongomp.png",type='cairo')
 plot(1:24, ompv,lty = 1, lwd = 1, col='blue', xlab="number of omp threads", ylab="time of execution", main="Strong omp scaling") 
 mod=lm(ompv~eompv)
 lines(1:24,fitted(mod),lty=1,lwd=1,col='red',type="b",pch=19);
-legend(x="topright",legend=c("omp performance","mpi fitted performance"),col=c("blue","red"),lty=c(1,1),pch=c(1,19))
+legend(x="topright",legend=c("omp actual performance","omp fitted performance"),col=c("blue","red"),lty=c(1,1),pch=c(1,19))
 dev.off()
 
 png("strongmpi.png",type='cairo')
 plot(1:24, mpiv,lty = 1, lwd = 1, col='blue', xlab="number of mpi threads", ylab="time of execution", main="Strong mpi scaling")
 mod=lm(mpiv~empiv)
-lines(1:24,fitted(mod),col='red');
+lines(1:24,fitted(mod),col='red',type='b',pch=19);
+legend(x="topright",legend=c("mpi actual performance","mpi fitted performance"),col=c("blue","red"),lty=c(1,1),pch=c(1,19))
 dev.off()
 
 
