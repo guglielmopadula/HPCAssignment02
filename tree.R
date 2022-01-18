@@ -87,6 +87,7 @@ dev.off()
 png("ompvsmpiweak.png",type='cairo')
 plot(1:24, ompweak[,2],lty = 1, lwd = 1, col='red',type='b',pch = 19, xlab="omp (red), mpi (blue)", ylab="time of execution", main="mpi vs omp weak scaling" )
 lines(1:24, mpiweak[,2],lty = 1, lwd = 1,col='blue',type='b',pch = 19)
+legend(x="topleft",legend=c("omp performance","mpi performance"),col=c("red","blue"),lty=c(1,1),pch=c(19,19))
 dev.off()
 
 
@@ -97,7 +98,8 @@ ympi=mpiweak[,2]
 modmpi=lm(ympi~xmpi)
 png("weakmpi.png",type='cairo')
 plot(1:24,ympi,col='blue',xlab="number of mpi threads", ylab="time of execution",main="Weak mpi scaling (constant workload per mpi thread)")
-lines(1:24,fitted(modmpi),col='red')
+lines(1:24,fitted(modmpi),col='red',type="b",pch=19)
+legend(x="topleft",legend=c("mpi actual performance","mpi fitted performance"),col=c("blue","red"),lty=c(1,1),pch=c(1,19))
 dev.off()
 
 n=5000000
@@ -107,7 +109,8 @@ yomp=ompweak[,2]
 modomp=lm(yomp~xomp)
 png("weakomp.png",type='cairo')
 plot(1:24,yomp,col='blue',xlab="number of omp threads", ylab="time of execution",main="Weak omp scaling (constant workload per omp thread)" )
-lines(1:24,fitted(modomp),col='red')
+lines(1:24,fitted(modomp),col='red',type="b",pch=19)
+legend(x="topleft",legend=c("omp actual performance","omp fitted performance"),col=c("blue","red"),lty=c(1,1),pch=c(1,19))
 dev.off()
 
 ompalg=read.csv("ompalg.csv")
@@ -120,6 +123,8 @@ ompalg2=ompalg[ompalg$alg==2,];
 plot(1:24,ompalg0$time, xlab="omp threads", ylab="time", lty = 1, lwd = 1,col='blue',type='b',pch = 19,xlim=c(0,24), ylim=c(25,400), main="omp performance with different algorithms")
 lines(1:24, ompalg1$time,lty = 1, lwd = 1,col='green',type='b',pch = 19)
 lines(1:24, ompalg2$time,lty = 1, lwd = 1,col='red',type='b',pch = 19)
+legend(x="topleft",legend=c("merge sort serial","merge sort parallel","quick select"),col=c("blue","green","red"),lty=c(1,1,1),pch=c(19,19,19))
+
 dev.off()
 
 png("mpialg.png", type='cairo')
