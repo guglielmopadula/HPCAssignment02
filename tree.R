@@ -55,7 +55,7 @@ name=paste("data",i,".png",sep="")
 }
 png(name, type='cairo')
 v=extract(i)
-plot(v[,1],v[,2],xlab="number of omp threads",ylab="time of execution", col='blue')
+plot(v[,1],v[,2],xlab="number of omp threads",ylab="time of execution", col='blue', title=paste('costant number of mpi*omp threads (equal to ',i,')',sep=""))
 mod=lm(v[,2]~v[,3]);
 lines(v[,1],fitted(mod),col="red")
 dev.off()
