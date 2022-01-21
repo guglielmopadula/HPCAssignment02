@@ -63,7 +63,7 @@ dev.off()
 }
 
 png("ompvsmpistrong.png",type='cairo')
-plot(1:24, ompv,lty = 1, lwd = 1, col='red',type='b',pch = 19, xlab="omp (red), mpi(blue)", ylab="time of execution", main="mpi vs omp strong scaling")
+plot(1:24, ompv,lty = 1, lwd = 1, col='red',type='b',pch = 19, xlab="number of cores used", ylab="time of execution", main="mpi vs omp strong scaling")
 lines(1:24, mpiv,lty = 1, lwd = 1,col='blue',type='b',pch = 19)
 legend(x="topright",legend=c("omp performance","mpi performance"),col=c("red","blue"),lty=c(1,1),pch=c(19,19))
 dev.off()
@@ -85,8 +85,8 @@ dev.off()
 
 
 png("ompvsmpiweak.png",type='cairo')
-plot(1:24, ompweak[,2],lty = 1, lwd = 1, col='red',type='b',pch = 19, xlab="omp (red), mpi (blue)", ylab="time of execution", main="mpi vs omp weak scaling" )
-lines(1:24, mpiweak[,2],lty = 1, lwd = 1,col='blue',type='b',pch = 19)
+plot(1:24, mpiweak[,2],lty = 1, lwd = 1, col='blue',type='b',pch = 19, xlab="number of cores used", ylab="time of execution", main="mpi vs omp weak scaling" )
+lines(1:24, ompweak[,2],lty = 1, lwd = 1,col='red',type='b',pch = 19)
 legend(x="topleft",legend=c("omp performance","mpi performance"),col=c("red","blue"),lty=c(1,1),pch=c(19,19))
 dev.off()
 
