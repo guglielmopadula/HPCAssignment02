@@ -19,11 +19,10 @@ int main(int args, char *argv[]) {
      	thread_id = omp_get_thread_num();
         nthreads = omp_get_num_threads();
         std::stringstream omp_stream;
-        omp_stream <<sched_getcpu()
-	<< " (CPU) " 
+        omp_stream <<" My CPU is " << sched_getcpu()
+	<< ", my omp thread is " 
 	<< thread_id
-        <<" (thread) " << rank << " (MPI) "
-	<<std::endl;
+        <<", my mpi thread is " << rank <<std::endl;
         std::cout << omp_stream.str();
     }
     MPI_Finalize();
