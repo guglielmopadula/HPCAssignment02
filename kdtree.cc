@@ -33,7 +33,7 @@ struct Node
     int depth;
 };
 
-
+//comparison operator
 template <int K>
 struct comp_dim {
 	comp_dim(int index) : index_(index) {}
@@ -43,17 +43,16 @@ struct comp_dim {
 	int index_;
 };
 
-
+// swap operator
 template<typename T>
 void myswap(T& a, T& b) {
     T temp(std::move(a));
     a = std::move(b);
     b = std::move(temp);
 }
+
 template<int K>
 Node<K>* deserialize(const typename std::vector<std::array<float_t,K>>::iterator first, const typename std::vector<std::array<float_t, K>>::iterator last);
-
-
 template<int K>
 void serialize(Node<K>* tree, std::vector<std::array<float_t,K>>& data);
 template <int K>
@@ -110,10 +109,8 @@ void printTree (Node<K> * root){
 	}
 }
 
-template <int K>
-int stringsize(int n){
-return K*12*n+1;
-}
+
+//some useful functions follows
 
 int child(int num, int depth){
 return num+pow(2,depth);
@@ -151,6 +148,7 @@ int sizerank(int num, int n, int depth){
 	
 }
 
+//quickselect algorithm
 template <int K>
 void quickselect(const typename std::vector<std::array<float_t,K>>::iterator first, const typename std::vector<std::array<float_t, K>>::iterator last, int k, int index)
 {
@@ -244,7 +242,7 @@ void mergesortParallelOpenMP( const typename std::vector<std::array<float_t,K>>:
     std::move(firstMerge, firstMerge + n, first);
 }
 
-//wrapper
+//this function chooses the sorting method to use
 template <int K>
 void sortwrapper(const typename std::vector<std::array<float_t,K>>::iterator first, const typename std::vector<std::array<float_t, K>>::iterator last, int index, int mergeflag)
 {
@@ -262,7 +260,7 @@ void sortwrapper(const typename std::vector<std::array<float_t,K>>::iterator fir
     }
 }
 
-//creates a new internal node without using MPI
+//creates a new internal node in the OMP phase
 template <int K>
 Node<K> * create_treenode_int(std::vector<std::array<float_t, K>> &mydata, int dim, int mydepth, int mergeflag)
 {
@@ -289,6 +287,7 @@ Node<K> * create_treenode_int(std::vector<std::array<float_t, K>> &mydata, int d
     return temp;
 }
 
+//internal MPI node function
 template <int K>
 Node<K> * create_treenode2(std::vector<std::array<float_t, K>> &data, std::vector<std::array<float_t, K>> &mydata ,int dim, int depth, int mergeflag){
 	MPI_Status status;
@@ -333,7 +332,7 @@ Node<K> * create_treenode2(std::vector<std::array<float_t, K>> &data, std::vecto
 }  
 
 
-
+//external MPI node function
 template <int K>
 Node<K> * create_treenode(std::vector<std::array<float_t, K>> &mydata, int dim, int mydepth, int mergeflag){
 	MPI_Request request;
@@ -406,7 +405,7 @@ Node<K> * create_treenode(std::vector<std::array<float_t, K>> &mydata, int dim, 
 
 
 
-
+//this function serializes the tree in an std::vector
 template<int K>
 void serialize(Node<K>* tree, std::vector<std::array<float_t,K>>& data){
 	std::array<float_t,K> treedata;
@@ -422,6 +421,7 @@ void serialize(Node<K>* tree, std::vector<std::array<float_t,K>>& data){
         }
 }
 
+//this function deserializes an std::vector in  a tree
 template<int K>
 Node<K>* deserialize(const typename std::vector<std::array<float_t,K>>::iterator first, const typename std::vector<std::array<float_t, K>>::iterator last){
 	int size=last-first;
@@ -468,7 +468,7 @@ Node<K> * create_treeleaf(std::vector<std::array<float_t, K>> &mydata, int dim, 
     return temp;
 }
 
-
+//build tree for the OMP part
 template <int K>
 Node<K> * build_tree_int(std::vector<std::array<float_t, K>> &mydata, int dim, int mydepth, int mergeflag) {
     Node<K> *temp;
@@ -482,6 +482,7 @@ Node<K> * build_tree_int(std::vector<std::array<float_t, K>> &mydata, int dim, i
     return temp;
 }
 
+// build tree for the MPI part
 template <int K>    
 Node<K> * build_tree(std::vector<std::array<float_t, K>> &mydata, int dim, int mydepth, int mergeflag) {
     Node<K> *temp;
@@ -494,9 +495,7 @@ Node<K> * build_tree(std::vector<std::array<float_t, K>> &mydata, int dim, int m
     return temp;
 }
     
-///prints the tree
-
-
+// the following function export the tree in a dot file
 template <int K>
 void exportTree_int(Node<K>* root, std::ostream& s, int* count){
 	if(root->left!=nullptr){
@@ -626,7 +625,7 @@ void exportTreeC(Node<K>* root){
 
 
 int main(int argc , char *argv[ ]){
-	constexpr int K=15;
+	constexpr int K=2;
 	int reorder=1;
 	int rank;
 	int numprocs;

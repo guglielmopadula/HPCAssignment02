@@ -4,7 +4,7 @@ rm *.png
 rm *.dot
 module load R
 module load openmpi-4.1.1+gnu-9.3.0
-mpic++ kdtree.cc -fopenmp -o kdtree -O3
+mpic++ kdtree.cc -fopenmp -o kdtree -O3 -std=c++14
 export TIMEFORMAT=%R
 echo "omp,mpi,time">>tree.csv
 echo "omp,time">>weakomp.csv
