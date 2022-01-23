@@ -659,7 +659,7 @@ int main(int argc , char *argv[ ]){
                 }	
 		Node<K> * root=build_tree<K>(data,0,0,mergeflag);
 		adjustDepth<K>(root,0);
-		//exportTreeC(root);
+		//exportTree(root);
                	//printTree<K>(root);
 		deleteTree<K>(root);
 
