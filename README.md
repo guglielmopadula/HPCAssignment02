@@ -21,7 +21,7 @@ How to compile the code for the testbinding:
 
 - mpic++ -fopenmp testbinding.cc -o testbinding
 
-How to run the code for the tree (example with 6 OMP threads nested in 4 MPI threads):
+How to run the code for the testbinding (example with 6 OMP threads nested in 4 MPI threads):
 
 OMP_NUM_THREADS=6 mpirun -np 4 --map-by slot:PE=6 ./testbinding 2>/dev/null
 
