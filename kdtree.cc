@@ -495,7 +495,7 @@ Node<K> * build_tree(std::vector<std::array<float_t, K>> &mydata, int dim, int m
     return temp;
 }
     
-// the following function export the tree in a dot file
+// the following functions export the tree in a dot file, there are two versions, one in C++14 and one in C
 template <int K>
 void exportTree_int(Node<K>* root, std::ostream& s, int* count){
 	if(root->left!=nullptr){
@@ -589,8 +589,6 @@ void exportTree_intC(Node<K>* root, FILE *s , int* count){
                 fprintf(s,"%f\" -> null%d;\n",root->point[K-1], *count);
                 (*count)++;
         }
-
-
 }
 
 
